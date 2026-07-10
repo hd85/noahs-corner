@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Home from './screens/Home.jsx'
 import Session from './screens/Session.jsx'
+import Recap from './screens/Recap.jsx'
 
 // Root of the app. Holds which screen we're on, the chosen mode, the session
 // count, and the answers gathered during a session. The Recap screen plugs in
@@ -22,6 +23,10 @@ export default function App() {
     setScreen('recap')
   }
 
+  function handleDone() {
+    setScreen('home')
+  }
+
   if (screen === 'home') {
     return <Home sessionCount={sessionCount} onStart={handleStart} />
   }
@@ -30,11 +35,5 @@ export default function App() {
     return <Session mode={mode} sessionCount={sessionCount} onComplete={handleComplete} />
   }
 
-  // Placeholder until the Recap screen is built in the next step.
-  return (
-    <div style={{ padding: 24, fontFamily: "'Baloo 2', sans-serif" }}>
-      <p>Session complete! Recap screen is next.</p>
-      <pre style={{ fontSize: 12, whiteSpace: 'pre-wrap' }}>{JSON.stringify(answers, null, 2)}</pre>
-    </div>
-  )
+  return <Recap answers={answers} onDone={handleDone} />
 }
