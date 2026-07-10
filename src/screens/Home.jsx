@@ -5,7 +5,7 @@ import ModeBtn from '../components/ModeBtn.jsx'
 // The home screen. Calm landing page: a warm welcome, a soft label for where
 // Noah is today (Exploring / Sharing / Storytelling — never a "level"), and a
 // choice of how to play. Picking a mode starts a session.
-export default function Home({ sessionCount = 0, onStart }) {
+export default function Home({ sessionCount = 0, onStart, accountEmail = null, onSignOut = null }) {
   const label = getRungLabel(getRung(sessionCount))
 
   return (
@@ -61,6 +61,29 @@ export default function Home({ sessionCount = 0, onStart }) {
             onClick={() => onStart && onStart('solo')}
           />
         </div>
+
+        {/* Quiet grown-up footer — only in cloud mode. Kept small and out of
+            the way so it doesn't pull Noah's attention. */}
+        {accountEmail && (
+          <p style={{ textAlign: 'center', marginTop: 28, fontSize: 12, color: colors.mutedLight }}>
+            Signed in as {accountEmail} ·{' '}
+            <button
+              onClick={onSignOut}
+              style={{
+                background: 'none',
+                border: 'none',
+                padding: 0,
+                color: colors.mutedLight,
+                fontFamily: font.family,
+                fontSize: 12,
+                textDecoration: 'underline',
+                cursor: 'pointer',
+              }}
+            >
+              Sign out
+            </button>
+          </p>
+        )}
       </div>
     </div>
   )

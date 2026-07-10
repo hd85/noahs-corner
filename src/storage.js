@@ -59,6 +59,15 @@ export function getHistory() {
   return Array.isArray(h) ? h : []
 }
 
+// Write both progress values at once (used as a local cache alongside cloud
+// sync). Keeps the local copy in step with what's saved to the cloud.
+export function saveLocal(sessions, history) {
+  write(SESSIONS_KEY, sessions)
+  write(HISTORY_KEY, history.slice(-MAX_HISTORY))
+}
+
+export const MAX_HISTORY_ENTRIES = MAX_HISTORY
+
 // v2 reading layer — advanced manually by Dad, never by the app.
 export function getReadingLevel() {
   const n = read(READING_KEY, 1)
