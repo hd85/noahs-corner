@@ -66,7 +66,7 @@ export default function Home({ sessionCount = 0, onStart, accountEmail = null, o
             the way so it doesn't pull Noah's attention. */}
         {accountEmail && (
           <p style={{ textAlign: 'center', marginTop: 28, fontSize: 12, color: colors.mutedLight }}>
-            Signed in as {accountEmail} ·{' '}
+            {accountEmail} · {sessionCount} {sessionCount === 1 ? 'session' : 'sessions'} ·{' '}
             <button
               onClick={onSignOut}
               style={{
